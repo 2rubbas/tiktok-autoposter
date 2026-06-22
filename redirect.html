@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Authorization Complete</title>
+  <style>
+    body { font-family: -apple-system, Segoe UI, Roboto, sans-serif; max-width: 640px; margin: 60px auto; padding: 0 20px; line-height: 1.6; color: #111; }
+    h1 { font-size: 1.5rem; }
+    .box { background: #f5f5f5; border: 1px solid #ddd; border-radius: 8px; padding: 16px; word-break: break-all; font-family: monospace; font-size: .95rem; }
+    .label { font-weight: 600; margin-top: 16px; }
+    .err { color: #b00; }
+  </style>
+</head>
+<body>
+  <h1>Authorization complete</h1>
+  <p>Copy the values below and paste them back to continue setup.</p>
+  <div class="label">Authorization code:</div>
+  <div class="box" id="code">(none)</div>
+  <div class="label">State:</div>
+  <div class="box" id="state">(none)</div>
+  <div class="label err" id="error"></div>
+  <script>
+    var p = new URLSearchParams(window.location.search);
+    document.getElementById('code').textContent = p.get('code') || '(none)';
+    document.getElementById('state').textContent = p.get('state') || '(none)';
+    var e = p.get('error');
+    if (e) { document.getElementById('error').textContent = 'Error: ' + e + ' - ' + (p.get('error_description') || ''); }
+  </script>
+</body>
+</html>
